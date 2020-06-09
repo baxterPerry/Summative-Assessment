@@ -17,11 +17,12 @@ SummativeAssessmentAudioProcessorEditor::SummativeAssessmentAudioProcessorEditor
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (600, 300);
 }
 
 SummativeAssessmentAudioProcessorEditor::~SummativeAssessmentAudioProcessorEditor()
 {
+    skin.jpg = ImageCache::getFromMemory(BinaryData::skin.jpg, BinaryData::600,300);
 }
 
 //==============================================================================
@@ -29,10 +30,9 @@ void SummativeAssessmentAudioProcessorEditor::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
-    g.setColour (Colours::white);
+    g.drawImageWithin(skin.jpg, 0, 0, getWidth(), getHeight(), RectanglePlacement::fillDestination);
     g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), Justification::centred, 1);
+        
 }
 
 void SummativeAssessmentAudioProcessorEditor::resized()

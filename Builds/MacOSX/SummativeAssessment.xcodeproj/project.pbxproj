@@ -85,6 +85,10 @@
 			isa = PBXBuildFile;
 			fileRef = 61954DC74FEF37AB93B6E505;
 		};
+		30AA64AB0E622C5CF0078C6B = {
+			isa = PBXBuildFile;
+			fileRef = 4692B4C8E82AF38B5432D981;
+		};
 		A18016701C2E57F10636C8AF = {
 			isa = PBXBuildFile;
 			fileRef = B29B910BA1D114B884F787D4;
@@ -228,6 +232,13 @@
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
 		};
+		35A2BAB5141741144E5F1F88 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BinaryData.h;
+			path = ../../JuceLibraryCode/BinaryData.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		3914249F5F4EECD92CEAA147 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -247,6 +258,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_plugin_client_VST_utils.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		4692B4C8E82AF38B5432D981 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BinaryData.cpp;
+			path = ../../JuceLibraryCode/BinaryData.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		4BF147E69A594E0E56DBFA78 = {
@@ -487,6 +505,13 @@
 			path = "../../JuceLibraryCode/include_juce_graphics.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		BDA0660C11CFA867662968DA = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.jpeg;
+			name = skin.jpg;
+			path = ../../skin.jpg;
+			sourceTree = "SOURCE_ROOT";
+		};
 		BEC4E10B1473A4705726B527 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.nib;
@@ -603,10 +628,19 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
+		1194516C61AF49A0EC914275 = {
+			isa = PBXGroup;
+			children = (
+				BDA0660C11CFA867662968DA,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		04558E703CEBF667EC05FB3C = {
 			isa = PBXGroup;
 			children = (
 				5D46141D31F0BB698D6E97B4,
+				1194516C61AF49A0EC914275,
 			);
 			name = SummativeAssessment;
 			sourceTree = "<group>";
@@ -636,6 +670,8 @@
 			isa = PBXGroup;
 			children = (
 				553B6452C9CB5F334EF1027D,
+				4692B4C8E82AF38B5432D981,
+				35A2BAB5141741144E5F1F88,
 				B29B910BA1D114B884F787D4,
 				E98B39DFBE09600AF428E692,
 				A82591EC616B0540F6818514,
@@ -1485,6 +1521,7 @@
 			files = (
 				46F2B20E156D87B60D169E68,
 				547947F969B17F60F479F33F,
+				30AA64AB0E622C5CF0078C6B,
 				A18016701C2E57F10636C8AF,
 				1E8703EC41DFBA3E526FA01D,
 				8B14A103FA39230A82534899,
