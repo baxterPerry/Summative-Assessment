@@ -30,6 +30,8 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
    #endif
 
+    short keepBitsFrom16 (short input, int keepBits);
+    
     void processBlock (AudioBuffer<float>&, MidiBuffer&) override;
 
     //==============================================================================

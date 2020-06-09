@@ -129,6 +129,13 @@ bool SummativeAssessmentAudioProcessor::isBusesLayoutSupported (const BusesLayou
 }
 #endif
 
+short SummativeAssessmentAudioProcessor::keepBitsFrom16( short input, int keepBits )
+{
+    keepBits = 16;
+    return (input & (-1 << (16-keepBits)));
+    //What is this outputting?
+}
+
 void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
     ScopedNoDenormals noDenormals;
@@ -145,6 +152,9 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
         
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
+            //auto currentSample
+            //How do we use the keepBits function to alter the signal
+            
             //channelData[sample]  = channelData[sample];
         }
 
