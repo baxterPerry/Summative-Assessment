@@ -12,7 +12,7 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="mdWtJN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
-    <GROUP id="{085C5DD7-3027-90F1-9738-DFBBFD473B05}" name="New Group">
+    <GROUP id="{085C5DD7-3027-90F1-9738-DFBBFD473B05}" name="Resources">
       <FILE id="Vm2nB6" name="skin.jpg" compile="0" resource="1" file="skin.jpg"/>
     </GROUP>
   </MAINGROUP>

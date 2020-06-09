@@ -22,7 +22,7 @@ SummativeAssessmentAudioProcessorEditor::SummativeAssessmentAudioProcessorEditor
 
 SummativeAssessmentAudioProcessorEditor::~SummativeAssessmentAudioProcessorEditor()
 {
-    skin.jpg = ImageCache::getFromMemory(BinaryData::skin.jpg, BinaryData::600,300);
+    skin = ImageCache::getFromMemory(BinaryData::skin_jpg, BinaryData::skin_jpgSize);
 }
 
 //==============================================================================
@@ -30,8 +30,8 @@ void SummativeAssessmentAudioProcessorEditor::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-    g.drawImageWithin(skin.jpg, 0, 0, getWidth(), getHeight(), RectanglePlacement::fillDestination);
-    g.setFont (15.0f);
+    g.drawImageWithin(skin, 0, 0, getWidth(), getHeight(), RectanglePlacement::fillDestination);
+    //g.setFont (15.0f);
         
 }
 

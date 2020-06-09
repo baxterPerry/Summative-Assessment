@@ -633,7 +633,7 @@
 			children = (
 				BDA0660C11CFA867662968DA,
 			);
-			name = "New Group";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		04558E703CEBF667EC05FB3C = {
