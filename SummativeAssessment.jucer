@@ -5,12 +5,13 @@
   <MAINGROUP id="mmJggW" name="SummativeAssessment">
     <GROUP id="{FCA7B470-3EA0-EB2A-EA53-62A0E5F1E265}" name="Source">
       <FILE id="H88ySZ" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
-      <FILE id="Zr3HDf" name="PluginProcessor.h" compile="0" resource="0"
-            file="Source/PluginProcessor.h"/>
+            file="Source/PluginProcessor.cpp" xcodeResource="0"/>
+      <FILE id="Zr3HDf" name="PluginProcessor.h" compile="1" resource="0"
+            file="Source/PluginProcessor.h" xcodeResource="0"/>
       <FILE id="U9am7q" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="mdWtJN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+            file="Source/PluginEditor.cpp" xcodeResource="0"/>
+      <FILE id="mdWtJN" name="PluginEditor.h" compile="1" resource="0" file="Source/PluginEditor.h"
+            xcodeResource="0"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
