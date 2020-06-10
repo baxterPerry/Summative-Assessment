@@ -141,11 +141,17 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+        auto* inBuffer = buffer.getReadPointer (channel);
+        auto* outBuffer = buffer.getWritePointer (channel);
         
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            //channelData[sample]  = channelData[sample];
+            int bitSample = inBuffer[sample];
+            
+           outBuffer[sample]  = (bitSample & (1 << (16 - keepBits)));
+            //outBuffer[sample] = bitSample;
+            
+            
         }
 
         // ..do something to the data...
