@@ -141,11 +141,22 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
 
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+        auto* inBuffer = buffer.getReadPointer (channel);
+        auto* outBuffer = buffer.getWritePointer (channel);
         
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            //channelData[sample]  = channelData[sample];
+           float bitSample =  inBuffer[sample] * (5);
+            float roundedValue = roundToInt(bitSample);
+            //pow()-1
+            //perform transformation on result of this line to round.
+            //outBuffer[sample] =  ((bitSample * (1 << (8))) / (1 << (8)));
+            //outBuffer[sample] = bitSample; (bitSample << 1)
+            outBuffer[sample] = roundedValue / (5); //How am I going to reduce quality? Round off. for example 63229 rounded to 100s  63200
+            // , floor(), ceil()
+            
+            
+            
         }
 
         // ..do something to the data...
