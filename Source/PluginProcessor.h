@@ -54,7 +54,8 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-    int keepBits = 8;
+    float degradeAmount = 8.0;
+   
 
 private:
     //==============================================================================
