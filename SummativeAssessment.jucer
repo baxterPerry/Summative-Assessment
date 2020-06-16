@@ -5,12 +5,13 @@
   <MAINGROUP id="mmJggW" name="SummativeAssessment">
     <GROUP id="{FCA7B470-3EA0-EB2A-EA53-62A0E5F1E265}" name="Source">
       <FILE id="H88ySZ" name="PluginProcessor.cpp" compile="1" resource="0"
-            file="Source/PluginProcessor.cpp"/>
-      <FILE id="Zr3HDf" name="PluginProcessor.h" compile="0" resource="0"
-            file="Source/PluginProcessor.h"/>
+            file="Source/PluginProcessor.cpp" xcodeResource="0"/>
+      <FILE id="Zr3HDf" name="PluginProcessor.h" compile="1" resource="0"
+            file="Source/PluginProcessor.h" xcodeResource="0"/>
       <FILE id="U9am7q" name="PluginEditor.cpp" compile="1" resource="0"
-            file="Source/PluginEditor.cpp"/>
-      <FILE id="mdWtJN" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+            file="Source/PluginEditor.cpp" xcodeResource="0"/>
+      <FILE id="mdWtJN" name="PluginEditor.h" compile="1" resource="0" file="Source/PluginEditor.h"
+            xcodeResource="0"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
@@ -34,6 +35,7 @@
         <MODULEPATH id="juce_gui_basics" path="../JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../JUCE/modules"/>
         <MODULEPATH id="juce_opengl" path="../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../sdk/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -48,6 +50,7 @@
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

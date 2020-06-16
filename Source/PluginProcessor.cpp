@@ -21,9 +21,13 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), tree(*this, nullptr)
 #endif
 {
+   NormalisableRange<float> cutOffRange (20.0f, 20000.0f);
+    
+    tree.createAndAddParameter("lowCutoff", "Cutoff", "lowCutoff", cutOffRange, lowPassFreq, nullptr, nullptr);
+    tree.createAndAddParameter("hiCutoff", "Cutoff", "hiCutoff", cutOffRange, highPassFreq, nullptr, nullptr);
 }
 
 SummativeAssessmentAudioProcessor::~SummativeAssessmentAudioProcessor()
@@ -95,14 +99,37 @@ void SummativeAssessmentAudioProcessor::changeProgramName (int index, const Stri
 //==============================================================================
 void SummativeAssessmentAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    lastSampleRate = sampleRate;
+    
+    dsp::ProcessSpec spec;
+    spec.sampleRate = lastSampleRate;
+    spec.maximumBlockSize = samplesPerBlock;
+    spec.numChannels = getMainBusNumOutputChannels();
+
+    lowPassFilter.reset();
+    hiPassFilter.reset();
+    updateFilter();
+    lowPassFilter.prepare(spec);
+    hiPassFilter.prepare(spec);
 }
 
 void SummativeAssessmentAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
+}
+
+
+void SummativeAssessmentAudioProcessor::updateFilter()
+{
+    int lowCutoff = *tree.getRawParameterValue("lowCutoff");
+    int hiCutoff = *tree.getRawParameterValue("hiCutoff");
+    
+    lowPassFilter.state->type = dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
+    hiPassFilter.state->type = dsp::StateVariableFilter::Parameters<float>::Type::highPass;
+    
+    lowPassFilter.state->setCutOffFrequency (lastSampleRate, lowCutoff);
+    hiPassFilter.state->setCutOffFrequency (lastSampleRate, hiCutoff);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -139,17 +166,39 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    
+    
+    //at the moment the filter happens before the bit crush!! TBC
+    
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        auto* channelData = buffer.getWritePointer (channel);
+        auto* inBuffer = buffer.getReadPointer (channel);
+        auto* outBuffer = buffer.getWritePointer (channel);
         
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
-            //channelData[sample]  = channelData[sample];
+           float bitSample =  inBuffer[sample] * (degradeAmount);
+            //float bitSampleFine =  bit;
+            float roundedValue = roundToInt(bitSample);
+            
+            //pow()-1
+            //perform transformation on result of this line to round.
+            //outBuffer[sample] =  ((bitSample * (1 << (8))) / (1 << (8)));
+            //outBuffer[sample] = bitSample; (bitSample << 1)
+            outBuffer[sample] = roundedValue / (degradeAmount); //How am I going to reduce quality? Round off. for example 63229 rounded to 100s  63200
+            // , floor(), ceil()
+            
+            
+            
         }
 
         // ..do something to the data...
     }
+    dsp::AudioBlock<float> block (buffer);
+    //lowPassFilter.process(dsp::ProcessContextReplacing<float> (block));
+       
+    hiPassFilter.process(dsp::ProcessContextReplacing<float> (block));
+    updateFilter();
 }
 
 //==============================================================================
