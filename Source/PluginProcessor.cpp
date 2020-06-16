@@ -26,8 +26,8 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
 {
    NormalisableRange<float> cutOffRange (20.0f, 20000.0f);
     
-    tree.createAndAddParameter("lowCutoff", "Cutoff", "lowCutoff", cutOffRange, 60.0f, nullptr, nullptr);
-    tree.createAndAddParameter("hiCutoff", "Cutoff", "hiCutoff", cutOffRange, 14000.0f, nullptr, nullptr);
+    tree.createAndAddParameter("lowCutoff", "Cutoff", "lowCutoff", cutOffRange, lowPassFreq, nullptr, nullptr);
+    tree.createAndAddParameter("hiCutoff", "Cutoff", "hiCutoff", cutOffRange, highPassFreq, nullptr, nullptr);
 }
 
 SummativeAssessmentAudioProcessor::~SummativeAssessmentAudioProcessor()
@@ -166,11 +166,7 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    dsp::AudioBlock<float> block (buffer);
-    lowPassFilter.process(dsp::ProcessContextReplacing<float> (block));
-       
-    //hiPassFilter.process(dsp::ProcessContextReplacing<float> (block));
-    updateFilter();
+    
     
     //at the moment the filter happens before the bit crush!! TBC
     
@@ -198,6 +194,11 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
 
         // ..do something to the data...
     }
+    dsp::AudioBlock<float> block (buffer);
+    //lowPassFilter.process(dsp::ProcessContextReplacing<float> (block));
+       
+    hiPassFilter.process(dsp::ProcessContextReplacing<float> (block));
+    updateFilter();
 }
 
 //==============================================================================

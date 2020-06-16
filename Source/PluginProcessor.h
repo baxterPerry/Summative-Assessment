@@ -58,6 +58,8 @@ public:
     int lastSampleRate;
     void updateFilter();
     void updateParameters();
+    float lowPassFreq = 20000.0;
+    float highPassFreq = 20.0;
    
    AudioProcessorValueTreeState tree;
 
