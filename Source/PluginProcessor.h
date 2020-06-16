@@ -55,9 +55,17 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     float degradeAmount = 8.0;
+    int lastSampleRate;
+    void updateFilter();
+    void updateParameters();
+    float lowPassFreq = 20000.0;
+    float highPassFreq = 20.0;
    
+   AudioProcessorValueTreeState tree;
 
 private:
+    dsp::ProcessorDuplicator< dsp::StateVariableFilter::Filter<float>, dsp::StateVariableFilter::Parameters<float>> lowPassFilter;
+    dsp::ProcessorDuplicator< dsp::StateVariableFilter::Filter<float>, dsp::StateVariableFilter::Parameters<float>> hiPassFilter;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SummativeAssessmentAudioProcessor)
 };
