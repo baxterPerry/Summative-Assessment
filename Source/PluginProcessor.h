@@ -57,7 +57,6 @@ public:
     int lastSampleRate;
     void updateFilter();
     void updateParameters();
-    float mixValue = 1.0f; //range will be 0.0 to 1.0
    
    AudioProcessorValueTreeState tree;
 
@@ -66,6 +65,8 @@ private:
     std::atomic<float>* lowPassParam = nullptr;
     std::atomic<float>* hiPassParam = nullptr;
     std::atomic<float>* mixParam = nullptr;
+    std::atomic<float>* inGainParam = nullptr;
+    std::atomic<float>* outGainParam = nullptr;
     dsp::StateVariableFilter::Filter<float>  lowPassFilter;
     dsp::StateVariableFilter::Parameters<float> lowPassParams;
     dsp::StateVariableFilter::Filter<float>  hiPassFilter;

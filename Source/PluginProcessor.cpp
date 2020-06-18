@@ -23,7 +23,7 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
                      #endif
                        ), tree(*this, nullptr, Identifier("Bit_Quantiser"),
 {
-         std::make_unique<AudioParameterFloat>("degradeAmount", //param id
+        std::make_unique<AudioParameterFloat>("degradeAmount", //param id
                                                "Quantisation",//param name
                                                1.0f, //min
                                                300.0f, //max
@@ -46,6 +46,18 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
                                               20.0f,
                                               20000.0f,
                                               20.0f
+                                              ),
+        std::make_unique<AudioParameterFloat>("inputGain",
+                                                 "Input Gain",
+                                                 1.0f,
+                                                 10.0f,
+                                                 1.0f
+                                                 ),
+        std::make_unique<AudioParameterFloat>("outputGain",
+                                              "Output Gain",
+                                              10.0f,
+                                              1.0f,
+                                              1.0f
                                               )
     
 })
@@ -57,6 +69,8 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
     mixParam = tree.getRawParameterValue("mixAmount");
     lowPassParam = tree.getRawParameterValue("lowCutoff");
     hiPassParam = tree.getRawParameterValue("hiCutoff");
+    inGainParam = tree.getRawParameterValue("inputGain");
+    outGainParam = tree.getRawParameterValue("outputGain");
 }
 
 SummativeAssessmentAudioProcessor::~SummativeAssessmentAudioProcessor()
@@ -206,7 +220,7 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
             updateFilter();
-            float bitSample =  inBuffer[sample] * (*quantParam);
+            float bitSample =  inBuffer[sample] *  (*quantParam);
             //float bitSampleFine =  bit;
             float roundedValue = roundToInt(bitSample);
             float wetValue = *mixParam; //this float will be changeable w slider.
