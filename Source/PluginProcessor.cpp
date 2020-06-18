@@ -26,7 +26,7 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
          std::make_unique<AudioParameterFloat>("degradeAmount", //param id
                                                "Quantisation",//param name
                                                1.0f, //min
-                                               100000.0f, //max
+                                               300.0f, //max
                                                10.0f //default value
                                                ),
         std::make_unique<AudioParameterFloat>("lowCutoff",
