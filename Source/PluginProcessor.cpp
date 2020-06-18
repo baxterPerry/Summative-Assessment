@@ -29,6 +29,12 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
                                                300.0f, //max
                                                10.0f //default value
                                                ),
+        std::make_unique<AudioParameterFloat>("mixAmount",
+                                                 "Dry/Wet Mix",
+                                                 0.0,
+                                                 1.0,
+                                                 1.0
+                                                 ),
         std::make_unique<AudioParameterFloat>("lowCutoff",
                                               "Low Pass cutoff",
                                               20.0f,
@@ -48,6 +54,7 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
    NormalisableRange<float> cutOffRange (20.0f, 20000.0f);
     
     quantParam = tree.getRawParameterValue("degradeAmount");
+    mixParam = tree.getRawParameterValue("mixAmount");
     lowPassParam = tree.getRawParameterValue("lowCutoff");
     hiPassParam = tree.getRawParameterValue("hiCutoff");
 }
@@ -202,7 +209,7 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
             float bitSample =  inBuffer[sample] * (*quantParam);
             //float bitSampleFine =  bit;
             float roundedValue = roundToInt(bitSample);
-            float wetValue = mixValue; //this float will be changeable w slider.
+            float wetValue = *mixParam; //this float will be changeable w slider.
             float dryValue = 1.0 - wetValue; //wetValue + dryValue will always = 1.0
             
             outBuffer[sample] = ((inBuffer[sample]) * dryValue) + (hiPassFilter.processSample(lowPassFilter.processSample(roundedValue / *quantParam) * wetValue));

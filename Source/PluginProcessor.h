@@ -65,6 +65,7 @@ private:
     std::atomic<float>* quantParam = nullptr;
     std::atomic<float>* lowPassParam = nullptr;
     std::atomic<float>* hiPassParam = nullptr;
+    std::atomic<float>* mixParam = nullptr;
     dsp::StateVariableFilter::Filter<float>  lowPassFilter;
     dsp::StateVariableFilter::Parameters<float> lowPassParams;
     dsp::StateVariableFilter::Filter<float>  hiPassFilter;
