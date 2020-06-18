@@ -210,7 +210,7 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
             float dryValue = 1.0 - wetValue; //wetValue + dryValue will always = 1.0
             
             //outBuffer[sample] = roundedValue / (degradeAmount);
-            outBuffer[sample] = ((inBuffer[sample]) * dryValue) + (lowPassFilter.processSample(roundedValue / degradeAmount) * wetValue);
+            outBuffer[sample] = ((inBuffer[sample]) * dryValue) + (lowPassFilter.processSample(roundedValue / *quantParam) * wetValue);
             
             //How am I going to reduce quality? Round off. for example 63229 rounded to 100s  63200
             // , floor(), ceil()
