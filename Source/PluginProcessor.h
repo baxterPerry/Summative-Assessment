@@ -67,9 +67,13 @@ public:
 private:
     std::atomic<float>* quantParam = nullptr;
     std::atomic<float>* lowPassParam = nullptr;
+    std::atomic<float>* hiPassParam = nullptr;
    // dsp::ProcessorDuplicator< dsp::StateVariableFilter::Filter<float>, dsp::StateVariableFilter::Parameters<float>> lowPassFilter;
     //dsp::ProcessorDuplicator< dsp::StateVariableFilter::Filter<float>, dsp::StateVariableFilter::Parameters<float>> hiPassFilter;
     dsp::StateVariableFilter::Filter<float>  lowPassFilter;
-    dsp::StateVariableFilter::Parameters<float> lowPassParams; //==============================================================================
+    dsp::StateVariableFilter::Parameters<float> lowPassParams;
+    dsp::StateVariableFilter::Filter<float>  hiPassFilter;
+    dsp::StateVariableFilter::Parameters<float> hiPassParams;
+    //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SummativeAssessmentAudioProcessor)
 };
