@@ -128,7 +128,6 @@ void SummativeAssessmentAudioProcessor::prepareToPlay (double sampleRate, int sa
     spec.maximumBlockSize = samplesPerBlock;
     spec.numChannels = getMainBusNumOutputChannels();
 
-   // lowPassParams.setCutOffFrequency(sampleRate, 200.0);
     lowPassFilter.prepare(spec);
     hiPassFilter.prepare(spec);
     lowPassFilter.parameters->type = dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
@@ -138,12 +137,6 @@ void SummativeAssessmentAudioProcessor::prepareToPlay (double sampleRate, int sa
     lowPassFilter.parameters->setCutOffFrequency(sampleRate, *lowPassParam);
     hiPassFilter.parameters->setCutOffFrequency(sampleRate, *hiPassParam);
     
-    
-   // hiPassFilter.reset();
-   // updateFilter();
-    
-   // hiPassFilter.prepare(spec);
-    //DBG(lowPassFilter.state->R2);
 }
 
 void SummativeAssessmentAudioProcessor::releaseResources()
@@ -158,11 +151,6 @@ void SummativeAssessmentAudioProcessor::updateFilter()
     lowPassFilter.parameters->setCutOffFrequency(lastSampleRate, *lowPassParam);
     hiPassFilter.parameters->setCutOffFrequency(lastSampleRate, *hiPassParam);
     
-    //lowPassFilter.state->type = dsp::StateVariableFilter::Parameters<float>::Type::lowPass;
-   // hiPassFilter.state->type = dsp::StateVariableFilter::Parameters<float>::Type::highPass;
-    
-    //lowPassFilter.state->setCutOffFrequency (lastSampleRate, lowCutoff);
-    //hiPassFilter.state->setCutOffFrequency (lastSampleRate, hiCutoff);
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -217,40 +205,13 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
             float wetValue = mixValue; //this float will be changeable w slider.
             float dryValue = 1.0 - wetValue; //wetValue + dryValue will always = 1.0
             
-            //outBuffer[sample] = roundedValue / (degradeAmount);
             outBuffer[sample] = ((inBuffer[sample]) * dryValue) + (hiPassFilter.processSample(lowPassFilter.processSample(roundedValue / *quantParam) * wetValue));
-            
-            //How am I going to reduce quality? Round off. for example 63229 rounded to 100s  63200
-            // , floor(), ceil()
-            
-            
+            //Input --> Quantiser --> LowPass --> HighPass --> Output
             
         }
 
         // ..do something to the data...
     }
-    
-  /*  //dsp::AudioBlock<float> inBlock (buffer);
-    dsp::AudioBlock<float> dryBlock;
-    dryBlock.copyFrom(buffer);
-    
-    dsp::AudioBlock<float> wetBlock;
-    wetBlock.copyFrom(buffer);
-    
-    dsp::AudioBlock<float> outBlock (buffer);
-    
-    
-    lowPassFilter.process(dsp::ProcessContextNonReplacing<float>(dryBlock, wetBlock));
-    //hiPassFilter.process(dsp::ProcessContextNonReplacing<float>(dryBlock, wetBlock));
-    
-    
-    
-    float wetFiltValue = 1.0;
-    float dryFiltValue = 0.0;
-   // dryBlock.multiplyBy(dryFiltValue);
-   // wetBlock.multiplyBy(wetFiltValue);
-    outBlock.replaceWithSumOf(dryBlock, wetBlock);
-    */
    
 }
 
