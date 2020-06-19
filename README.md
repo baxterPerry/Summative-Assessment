@@ -1,10 +1,8 @@
-# Summative Assessment
- Repo for summative plug in
+# Summative Assessment - Jamie Caughley, Baxter Perry & Sam Morgan
 
-Write Your name below and commit:
-Baxter Perry
-Jamie!
+Bit Crusher
 
-Did it work?
-Not sure?
-Maybe?
+[Music DSP Effects] (https://www.musicdsp.org/en/latest/Effects/index.html)
+
+Orinally our plug in was based on [Bit quantization/reduction effect] (https://www.musicdsp.org/en/latest/Effects/96-bit-quantization-reduction-effect.html)
+
