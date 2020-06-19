@@ -49,14 +49,14 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
                                               ),
         std::make_unique<AudioParameterFloat>("inputGain",
                                                  "Input Gain",
-                                                 1.0f,
-                                                 10.0f,
+                                                 0.0f,
+                                                 3.0f,
                                                  1.0f
                                                  ),
         std::make_unique<AudioParameterFloat>("outputGain",
                                               "Output Gain",
-                                              10.0f,
-                                              1.0f,
+                                              0.0f,
+                                              3.0f,
                                               1.0f
                                               )
     
@@ -220,13 +220,13 @@ void SummativeAssessmentAudioProcessor::processBlock (AudioBuffer<float>& buffer
         for (auto sample = 0; sample < buffer.getNumSamples(); ++sample)
         {
             updateFilter();
-            float bitSample =  inBuffer[sample] *  (*quantParam);
+            float bitSample =  (inBuffer[sample] * *inGainParam) * (*quantParam);
             //float bitSampleFine =  bit;
             float roundedValue = roundToInt(bitSample);
             float wetValue = *mixParam; //this float will be changeable w slider.
             float dryValue = 1.0 - wetValue; //wetValue + dryValue will always = 1.0
             
-            outBuffer[sample] = ((inBuffer[sample]) * dryValue) + (hiPassFilter.processSample(lowPassFilter.processSample(roundedValue / *quantParam) * wetValue));
+            outBuffer[sample] = (((inBuffer[sample]) * dryValue) + (hiPassFilter.processSample(lowPassFilter.processSample(roundedValue / *quantParam ) * wetValue)) * *outGainParam);
             //Input --> Quantiser --> LowPass --> HighPass --> Output
             
         }
