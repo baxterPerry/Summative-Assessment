@@ -45,13 +45,14 @@ private:
     Label mixSliderLabel;
     Label inputGainSliderLabel;
     Label outputGainSliderLabel;
-                                                   
+                                       
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> inputGainSliderAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> quantSliderAttachment;
-    //std::unique_ptr<SliderAttachment> lowPassAttachment;
-    //std::unique_ptr<SliderAttachment> hiPassAttachment;
-    //std::unique_ptr<SliderAttachment> quantSliderAttachment;
-    //std::unique_ptr<SliderAttachment> quantSliderAttachment;
-    //std::unique_ptr<SliderAttachment> quantSliderAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> lowPassSliderAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> hiPassSliderAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> mixSliderAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> outputGainSliderAttachment;
+
     
     LookAndFeel_V4 otherLookAndFeel;
     LookAndFeel_V4 bar1LookAndFeel;

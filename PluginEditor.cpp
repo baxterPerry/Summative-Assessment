@@ -76,12 +76,17 @@ SummativeAssessmentAudioProcessorEditor::SummativeAssessmentAudioProcessorEditor
     
        
         addAndMakeVisible(inputGainSlider);
+        inputGainSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "inputGain", inputGainSlider));
         addAndMakeVisible(quantSlider);
-    quantSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "degradeAmount", quantSlider));
+        quantSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "degradeAmount", quantSlider));
         addAndMakeVisible(lowPassSlider);
+        lowPassSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "lowCutoff", lowPassSlider));
         addAndMakeVisible(hiPassSlider);
+        hiPassSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "hiCutoff", hiPassSlider));
         addAndMakeVisible(mixSlider);
+        mixSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "mixAmount", mixSlider));
         addAndMakeVisible(outputGainSlider);
+        outputGainSliderAttachment.reset(new AudioProcessorValueTreeState::SliderAttachment (tree, "outputGain", outputGainSlider));
     
         addAndMakeVisible(inputGainSliderLabel);
         inputGainSliderLabel.setText("Input Gain", dontSendNotification);
@@ -95,6 +100,9 @@ SummativeAssessmentAudioProcessorEditor::SummativeAssessmentAudioProcessorEditor
         addAndMakeVisible(quantSliderLabel);
         quantSliderLabel.setText("Quantisation", dontSendNotification);
         quantSliderLabel.attachToComponent(&quantSlider, false);
+        addAndMakeVisible(mixSliderLabel);
+        mixSliderLabel.setText("Mix", dontSendNotification);
+        mixSliderLabel.attachToComponent(&mixSlider, false);
         addAndMakeVisible(outputGainSliderLabel);
         outputGainSliderLabel.setText("Output Gain", dontSendNotification);
         outputGainSliderLabel.attachToComponent(&outputGainSlider, false);
@@ -119,7 +127,7 @@ void SummativeAssessmentAudioProcessorEditor::paint (Graphics& g)
     quantSlider.setBounds(165, 75, 150, 200);
     lowPassSlider.setBounds(330, 100, 100, 150);
     hiPassSlider.setBounds(435, 100, 100, 150);
-    mixSlider.setBounds(565, 82.5, 25, 150);
+    mixSlider.setBounds(560, 82.5, 35, 150);
     outputGainSlider.setBounds(605, 82.5, 125, 175);
     
     
