@@ -26,7 +26,7 @@ SummativeAssessmentAudioProcessor::SummativeAssessmentAudioProcessor()
         std::make_unique<AudioParameterFloat>("degradeAmount", //param id
                                                "Quantisation",//param name
                                                1.0f, //min
-                                               300.0f, //max
+                                               20.0f, //max
                                                10.0f //default value
                                                ),
         std::make_unique<AudioParameterFloat>("mixAmount",
@@ -244,12 +244,15 @@ bool SummativeAssessmentAudioProcessor::hasEditor() const
 
 AudioProcessorEditor* SummativeAssessmentAudioProcessor::createEditor()
 {
-    return new SummativeAssessmentAudioProcessorEditor (*this);
+    return new SummativeAssessmentAudioProcessorEditor (*this, tree);
 }
 
 //==============================================================================
 void SummativeAssessmentAudioProcessor::getStateInformation (MemoryBlock& destData)
 {
+    auto state = tree.copyState();
+    std::unique_ptr<XmlElement> xml (state.createXml());
+    copyXmlToBinary (*xml, destData);
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
@@ -257,6 +260,11 @@ void SummativeAssessmentAudioProcessor::getStateInformation (MemoryBlock& destDa
 
 void SummativeAssessmentAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
+       std::unique_ptr<XmlElement> xmlState (getXmlFromBinary (data, sizeInBytes));
+    
+       if (xmlState.get() != nullptr)
+           if (xmlState->hasTagName (tree.state.getType()))
+               tree.replaceState (ValueTree::fromXml (*xmlState));
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
@@ -267,3 +275,4 @@ AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new SummativeAssessmentAudioProcessor();
 }
+
