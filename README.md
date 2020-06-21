@@ -19,13 +19,18 @@ Input Signal → Input Gain →  Bit Quantisation → Low Pass → High Pass →
 ### Quantisation Process:
 The algorithm in charge of this operation takes the floating point value of the current sample, and multiplies it by the “quantisation amount” variable. The result is then rounded to the nearest integer, and so all the data points after the decimal point are lost. This is then divided by the same “quantisation amount” variable to convert the rounded value back into a floating point variable. 
 
-Example:
+### Example:
+
 0.53627 = current sample value “s”
+
 100 = Bit quantisation amount "q"
 
 s * q = 53.627		
+
 53.627 is rounded to int = 53	
+
 53 / q = 0.53
+
 0.53 = new “s” value
 
 ### Filters
