@@ -4,14 +4,14 @@
 
 <img width="752" alt="Screen Shot 2020-06-21 at 10 59 29 PM" src="https://user-images.githubusercontent.com/61439735/85223561-16071880-b418-11ea-83fc-8ef994d2dfda.png">
 
-Masher is a simple bit quantisation software plugin, available  in VST, VST3, or AU format. It features:
+### Masher is a simple bit quantisation software plugin, available  in VST, VST3, or AU format. It features:
 Bit Quantisation 
 Low Pass
 High Pass
 Dry/Wet Mix
 Input Gain
 Output Gain
-The state of the plugin is fully recallable, and all parameters are able to be automated. 
+### The state of the plugin is fully recallable, and all parameters are able to be automated. 
 
 ### Signal Flow:
 Input Signal → Input Gain →  Bit Quantisation → Low Pass → High Pass → Dry/Wet Mix → Output Gain → Output Signal
@@ -21,8 +21,8 @@ The algorithm in charge of this operation takes the floating point value of the 
 
 Example:
 0.53627 = current sample value “s”
-100 = Bit quantisation amount “q”
----------------------------------------------
+100 = Bit quantisation amount "q"
+
 s * q = 53.627		
 53.627 is rounded to int = 53	
 53 / q = 0.53
