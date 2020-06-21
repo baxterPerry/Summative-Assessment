@@ -1,6 +1,6 @@
 # Summative Assessment - Jamie Caughley, Baxter Perry & Sam Morgan
 
-###Masher
+### Masher
 
 <img width="752" alt="Screen Shot 2020-06-21 at 10 59 29 PM" src="https://user-images.githubusercontent.com/61439735/85223561-16071880-b418-11ea-83fc-8ef994d2dfda.png">
 
